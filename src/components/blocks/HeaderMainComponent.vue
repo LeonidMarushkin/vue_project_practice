@@ -1,18 +1,23 @@
 <template>
   <div class="header">
     <h1 class="header__title">наша продукция</h1>
-    <basketIconComponent />
+    <div class="header__cart">
+      <div class="header__text">
+        <span>3 товара</span>
+        <span>на сумму 3 500</span>
+      </div>
+      <ButtonCartComponent />
+    </div>
   </div>
 </template>
 
 <script>
 // import { ref } from 'vue'
-import basketIconComponent from '../icons/basketIconComponent.vue';
-
+import ButtonCartComponent from '../ui/ButtonCartComponent.vue';
 export default {
   name: 'HeaderMainComponent',
   components: {
-    basketIconComponent
+    ButtonCartComponent
   },
   props: {
   },
@@ -22,6 +27,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .header__title {
   color: #FFF;
   font-family: Montserrat;
@@ -30,5 +41,24 @@ export default {
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
+}
+
+.header__text {
+  color: #FFF;
+  text-align: right;
+  font-family: Montserrat;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.header__cart {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 </style>

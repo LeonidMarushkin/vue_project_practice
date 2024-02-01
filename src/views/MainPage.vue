@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    <HeaderMainComponent />
+    <div class="main__header">
+      <HeaderMainComponent />
+    </div>
     <MainComponent />
   </div>
 </template>
@@ -26,5 +28,11 @@ export default {
 <style lang="scss" scoped>
 .main {
   background: #161516;
+  // height: calc(100vh - 135px);
+}
+
+.main__header {
+  padding-top: 54px;
+  padding-bottom: 81px;
 }
 </style>
