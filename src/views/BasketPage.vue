@@ -8,7 +8,7 @@
         </div>
         <hr class="separator">
         <div class="main__footer">
-            <FooterBasketComponent price="6 220 ₽" />
+            <FooterBasketComponent :price="basketCount.reduce((a, b) => a + b.price, 0)" />
         </div>
     </div>
 </template>
@@ -18,6 +18,8 @@
 import HeaderBasketComponent from '@/components/blocks/HeaderBasketComponent.vue';
 import MainBasketComponent from '@/components/blocks/MainBasketComponent.vue';
 import FooterBasketComponent from '@/components/blocks/FooterBasketComponent.vue';
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 export default {
     name: 'BasketPage',
     components: {
@@ -28,6 +30,14 @@ export default {
     props: {
     },
     setup() {
+        const store = useStore();
+
+        const basketCount = computed(() => {
+            return store.getters.getBasketGoods
+        })
+        return {
+            basketCount,
+        }
     }
 }
 </script>

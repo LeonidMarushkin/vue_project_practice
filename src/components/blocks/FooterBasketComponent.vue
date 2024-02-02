@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="main__info">
-            <span class="main__info-price">{{ price }}</span>
+            <span class="main__info-price">{{ price }} ₽</span>
             <p class="main__info-text">Заказ на сумму:</p>
         </div>
         <ButtonComponent isBasketFooter textShow buttonText="Оформить заказ" />
@@ -18,8 +18,8 @@ export default {
     },
     props: {
         price: {
-            type: String,
-            default: 'цена в руб'
+            type: Number,
+            default: 0
         },
     },
     setup() {
