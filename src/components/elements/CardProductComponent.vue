@@ -10,7 +10,7 @@
         <div class="card__price">
           <span>{{ price }}</span>
         </div>
-        <ButtonComponent fontawesomeIcon='fa-solid fa-plus fa-2xs' isMain iconShow/>
+        <ButtonComponent fontawesomeIcon='fa-solid fa-plus fa-2xs' isMain iconShow />
       </div>
     </div>
     <div v-else class="cardBasket">
@@ -22,7 +22,7 @@
         <div class="card__price">
           <span>{{ price }}</span>
         </div>
-        <ButtonComponent fontawesomeIcon='fa-solid fa-plus fa-2xs' isBasketCard iconShow isRotated/>
+        <ButtonComponent fontawesomeIcon='fa-solid fa-plus fa-2xs' isBasketCard iconShow isRotated />
       </div>
     </div>
   </div>
