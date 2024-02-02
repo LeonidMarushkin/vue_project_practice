@@ -3,11 +3,11 @@
     <h1 class="header__title">наша продукция</h1>
     <div class="header__cart">
       <div class="header__text">
-        <span>3 товара</span>
-        <span>на сумму 3 500</span>
+        <span>{{ basketCount.length }} товара</span>
+        <span>на сумму {{ basketCount.reduce((a, b) => a + b.price, 0) }} ₽</span>
       </div>
       <router-link to="/basket">
-        <ButtonCartComponent/>
+        <ButtonCartComponent />
       </router-link>
     </div>
   </div>
@@ -15,15 +15,37 @@
 
 <script>
 // import { ref } from 'vue'
+import { useStore } from 'vuex';
 import ButtonCartComponent from '../ui/ButtonCartComponent.vue';
+import { computed } from 'vue';
+
 export default {
   name: 'HeaderMainComponent',
+
   components: {
     ButtonCartComponent
   },
+
   props: {
   },
+
+  methods: {
+  },
+
   setup() {
+    const store = useStore();
+
+    const basketCount = computed(() => {
+      return store.getters.getBasketGoods
+    })
+
+    // const basketSum = computed(()=> {
+
+    // })
+    return {
+      basketCount,
+      // basketSum
+    }
   }
 }
 </script>
