@@ -28,6 +28,7 @@ export default {
 <style lang="scss" scoped>
 .main {
   background: #161516;
+  padding-bottom: 45px;
   // height: calc(100vh - 135px);
 }
 

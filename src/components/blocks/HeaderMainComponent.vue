@@ -6,7 +6,9 @@
         <span>3 товара</span>
         <span>на сумму 3 500</span>
       </div>
-      <ButtonCartComponent />
+      <router-link to="/basket">
+        <ButtonCartComponent/>
+      </router-link>
     </div>
   </div>
 </template>
@@ -59,6 +61,7 @@ export default {
 .header__cart {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 20px;
+  align-items: center;
 }
 </style>
