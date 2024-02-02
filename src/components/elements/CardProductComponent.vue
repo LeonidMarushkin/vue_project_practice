@@ -22,7 +22,7 @@
         <div class="card__price">
           <span>{{ price }}</span>
         </div>
-        <ButtonComponent fontawesomeIcon='fa-solid fa-plus fa-2xs' isMain iconShow/>
+        <ButtonComponent fontawesomeIcon='fa-solid fa-plus fa-2xs' isBasketCard iconShow isRotated/>
       </div>
     </div>
   </div>
@@ -122,7 +122,7 @@ export default {
 }
 
 .card__price {
-  color: #FFF;
+  color: rgb(213, 140, 81);
   font-family: Montserrat;
   font-size: 17px;
   font-style: normal;

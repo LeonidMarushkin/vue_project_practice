@@ -48,7 +48,12 @@ export default {
     buttonText: {
       type: String,
       default: ''
-    }
+    },
+
+    isRotated: {
+      type: Boolean,
+      default: false
+    },
   },
 
   data() {
@@ -60,7 +65,8 @@ export default {
       return {
         buttonMainCard: this.isMain,
         buttonBasketCard: this.isBasketCard,
-        buttonBasketFooter: this.isBasketFooter
+        buttonBasketFooter: this.isBasketFooter,
+        buttonRotate: this.isRotated
       }
     }
   },
@@ -113,12 +119,21 @@ export default {
   text-align: center;
 }
 
+.buttonRotate {
+  rotate: 45deg;
+}
+
+.buttonBasketCard:hover {
+  background: #D58C51;
+  color: rgb(19, 19, 19);
+}
+
 .buttonMainCard:hover {
   background: #D58C51;
   border: 1px solid #D58C51;
 }
 
-.buttonBasketFooter:hover{
+.buttonBasketFooter:hover {
   background: #D58C51;
   color: rgb(19, 19, 19);
 }
