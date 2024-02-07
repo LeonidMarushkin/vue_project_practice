@@ -29,10 +29,15 @@ export default {
 .main {
   background: #161516;
   padding-bottom: 45px;
+  margin-top: 150px;
   // height: calc(100vh - 135px);
 }
 
 .main__header {
+  background: #161516;
+  height: 0;
+  inset: 0;
+  position: fixed;
   padding-top: 54px;
   padding-bottom: 81px;
 }
