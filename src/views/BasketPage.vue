@@ -6,9 +6,11 @@
         <div class="main__goods">
             <MainBasketComponent />
         </div>
-        <hr class="separator">
-        <div class="main__footer">
-            <FooterBasketComponent :price="basketCount.reduce((a, b) => a + b.price, 0)" />
+        <div>
+            <hr class="separator">
+            <div class="main__footer">
+                <FooterBasketComponent :price="basketCount.reduce((a, b) => a + b.price, 0)" />
+            </div>
         </div>
     </div>
 </template>
@@ -43,22 +45,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main {
+    // height: 100%;
+    // width: 100%;
+    overflow: hidden;
+}
+
 .main__header {
+    background: #161516;
+    height: 0;
+    inset: 0;
+    // width: 100vh;
+    position: fixed;
     padding-top: 54px;
     padding-bottom: 81px;
 }
 
 .main__footer {
+    height: 50px;
     width: 100%;
-    // position: fixed;
-    height: 20%;
-    bottom: 0;
-    left: 0;
+}
+
+.main__goods {
+    margin-top: 130px;
+    height: calc(100% - 220px);
+    overflow-y: scroll;
 }
 
 .separator {
-    margin-top: 100px;
-    margin-bottom: 28px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border: 1px solid rgb(213, 140, 81);
 }
 </style>
