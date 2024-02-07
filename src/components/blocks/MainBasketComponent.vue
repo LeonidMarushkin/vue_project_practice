@@ -1,7 +1,8 @@
 <template>
   <div class="main">
     <CardProductComponent v-for="( cartData, index ) in prodCartData" v-bind:key="index" :title="cartData.title"
-      :description="cartData.description" :price="cartData.price" :imageSource="cartData.imageSource" :line="true" />
+      :description="cartData.description" :price="cartData.price" :imageSource="cartData.imageSource" :line="true"
+      @clickBasket="removeFromBasket(index)" />
   </div>
 </template>
 
@@ -25,9 +26,14 @@ export default {
     const prodCartData = computed(() => {
       return store.getters.getBasketGoods
     })
-    
+
+    const removeFromBasket = (goodIndex) => {
+      console.log('Удалено из корзины', goodIndex);
+      store.commit('removeGoodFromBasket', goodIndex);
+    }
     return {
-      prodCartData
+      prodCartData,
+      removeFromBasket
     }
   }
 }

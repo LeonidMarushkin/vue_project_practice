@@ -1,7 +1,6 @@
 <template>
   <div class="main">
     <button v-bind:class="buttonClass">
-      <!-- {{ buttonText }} -->
       <div v-if="iconShow"><i :class="fontawesomeIcon"></i></div>
       <div v-if="textShow">{{ buttonText }}</div>
     </button>
