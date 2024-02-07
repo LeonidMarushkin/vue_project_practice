@@ -30,6 +30,7 @@ export default {
 
     const addToBasket = (goodId) => {
       console.log(`Добвалено в в корзину`, goodId);
+      store.commit('addGoodInBasket', goodId);
     }
     return {
       prodCartData,
