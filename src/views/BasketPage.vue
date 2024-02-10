@@ -48,7 +48,7 @@ export default {
 .main {
     // height: 100%;
     // width: 100%;
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 .main__header {
@@ -59,6 +59,7 @@ export default {
     position: fixed;
     padding-top: 54px;
     padding-bottom: 81px;
+    z-index: 0;
 }
 
 .main__footer {
@@ -68,8 +69,7 @@ export default {
 
 .main__goods {
     margin-top: 130px;
-    height: calc(100% - 220px);
-    overflow-y: scroll;
+    height: calc(100% - 240px);
 }
 
 .separator {

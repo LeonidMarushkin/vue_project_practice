@@ -30,6 +30,7 @@ export default {
   background: #161516;
   padding-bottom: 45px;
   margin-top: 150px;
+  height: calc(100vh - 135px);
   // height: calc(100vh - 135px);
 }
 
@@ -40,5 +41,6 @@ export default {
   position: fixed;
   padding-top: 54px;
   padding-bottom: 81px;
+  // height: 150px;
 }
 </style>
