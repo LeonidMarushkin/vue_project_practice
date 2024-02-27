@@ -48,6 +48,10 @@ export default {
         setBaskteInitialData(state) {
             const basket = JSON.parse(localStorage.getItem('basket'));
             state.goodsInBasket = basket;
+        },
+        clearBasket(state) {
+            state.goodsInBasket = [];
+            localStorage.removeItem('basket');
         }
     },
     actions: {

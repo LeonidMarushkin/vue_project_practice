@@ -15,9 +15,12 @@
             <div class="auth-form__info">
                 <input class="auth-form__info-field" v-model="loginValue" type="login" name="login" autocomplete="off"
                     required placeholder="Логин">
+                <span class="errorMsg" v-if="isErrorLog">Логин должен содержать не менее 4-х символов</span>
                 <input class="auth-form__info-field" v-model="passValue" type="password" name="password" autocomlete="off"
                     required placeholder="Пароль">
+                <span class="errorMsg" v-if="isErrorPass">Пароль должен содержать не менее 4-х символов</span>
             </div>
+            <span class="errorMsg" v-if="isErrorLogin">Логин или пароль неверен</span>
             <div v-if="regShow" class="button">
                 <ButtonComponent @click="checkUser()" textShow isBasketFooter :buttonText=buttonTxt />
             </div>
@@ -59,37 +62,54 @@ export default {
         const loginValue = ref('');
         const passValue = ref('');
         const router = useRouter();
+        const isErrorLogin = ref(false);
+        const isErrorLog = ref(false);
+        const isErrorPass = ref(false);
         const addUser = () => {
-            //валидация
-            // console.log('log', loginValue);
-            // console.log('pass', passValue);
             const users = JSON.parse(localStorage.getItem('users'));
             if (!(loginValue.value == '') && !(passValue.value == '')) {
-                users.push({
-                    login: loginValue.value,
-                    pass: passValue.value
-                });
-                localStorage.users = JSON.stringify(users);
+                const userFinded = users.find(elem => {
+                    return elem.login == loginValue.value
+                })
+                if (userFinded) {
+                    alert('Такой пользователь зарегистрирован!');
+                    router.push('/authorization');
+                } else {
+                    if (loginValue.value.length < 5) {
+                        isErrorLog.value = true;
+                    } else {
+                        isErrorLog.value = false;
+                        if (passValue.value.length < 5) {
+                            isErrorPass.value = true;
+                        } else {
+                            isErrorPass.value = false;
+                            users.push({
+                                login: loginValue.value,
+                                pass: passValue.value
+                            });
+                            localStorage.users = JSON.stringify(users);
+                            alert('Регистрация прошла успешно!')
+                            router.push('/authorization');
+                        }
+                    }
+                }
             }
-            // localStorage.setItem('isLogged', JSON.stringify(true));
-            // router.push('/');
         }
         const checkUser = () => {
-            //валидация
-            // console.log('log', loginValue);
-            // console.log('pass', passValue);
-            const users = JSON.parse(localStorage.getItem('users'));
-            const userFinded = users.find(elem => {
-                return elem.login == loginValue.value
-            })
-            if (!userFinded) {
-                alert('Такой пользователь не зарегистрирован!');
-            } else {
-                if (userFinded.pass == passValue.value) {
-                    localStorage.isLogged = JSON.stringify(true);
-                    router.push('/');
+            if (loginValue.value) {
+                const users = JSON.parse(localStorage.getItem('users'));
+                const userFinded = users.find(elem => {
+                    return elem.login == loginValue.value
+                })
+                if (userFinded) {
+                    if (userFinded.pass == passValue.value) {
+                        localStorage.isLogged = JSON.stringify(true);
+                        router.push('/');
+                    } else {
+                        isErrorLogin.value = true;
+                    }
                 } else {
-                    alert('Введен неверный пароль!');
+                    isErrorLogin.value = true;
                 }
             }
         }
@@ -97,7 +117,10 @@ export default {
             checkUser,
             addUser,
             loginValue,
-            passValue
+            passValue,
+            isErrorLogin,
+            isErrorLog,
+            isErrorPass
         }
     }
 }
@@ -134,7 +157,6 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    margin-bottom: 60px;
 }
 
 .auth-form__info-field {
@@ -151,7 +173,7 @@ export default {
 }
 
 .auth-form {
-    width: 460px;
+    width: 500px;
     padding: 70px 0;
     border: 3px solid green;
     text-align: center;
@@ -160,5 +182,27 @@ export default {
 
 .auth-form__link {
     padding-left: 315px;
+    color: rgb(213, 140, 81);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 13px;
+    letter-spacing: 0%;
+    text-align: right;
+    text-decoration-line: underline;
+}
+
+.errorMsg {
+    color: rgb(255, 11, 11);
+    font-family: Montserrat;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 10px;
+    letter-spacing: 0%;
+    text-align: left;
+}
+
+.button {
+    margin-top: 20px;
 }
 </style>

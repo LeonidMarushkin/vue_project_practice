@@ -4,12 +4,13 @@
             <span class="main__info-price">{{ price }} ₽</span>
             <p class="main__info-text">Заказ на сумму:</p>
         </div>
-        <ButtonComponent isBasketFooter textShow buttonText="Оформить заказ" />
+        <ButtonComponent @click="makeOrder()" isBasketFooter textShow buttonText="Оформить заказ" />
     </div>
 </template>
 
 <script>
 // import { ref } from 'vue'
+import { useStore } from 'vuex';
 import ButtonComponent from '../ui/ButtonComponent.vue';
 export default {
     name: 'FooterBasketComponent',
@@ -23,6 +24,14 @@ export default {
         },
     },
     setup() {
+        const store = useStore();
+        const makeOrder = () => {
+            store.commit('clearBasket');
+            alert('Заказ оформлен!')
+        }
+        return {
+            makeOrder
+        }
     }
 }
 </script>
