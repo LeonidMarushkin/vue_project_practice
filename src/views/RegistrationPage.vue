@@ -1,5 +1,5 @@
 <template>
-    <AuthorizationFormComponent buttonTxt='Зарегестрироваться' formHeaderTxt='РЕГИСТРАЦИЯ' logShow/>
+    <AuthorizationFormComponent buttonTxt='Зарегистрироваться' formHeaderTxt='РЕГИСТРАЦИЯ' logShow/>
 </template>
 
 <script>

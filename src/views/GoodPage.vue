@@ -12,7 +12,8 @@
             <p class="info__descr">{{ good.description }}</p>
             <div class="info__footer">
                 <span class="price">{{ good.price }} ₽</span>
-                <ButtonComponent @click="saveToLocalStorage()" isGoodFooter textShow buttonText="В корзину" />
+                <ButtonComponent @click="saveToLocalStorage(); changeLabel()" isGoodFooter textShow
+                    :buttonText="buttonLabel" />
             </div>
         </div>
     </div>
@@ -21,7 +22,7 @@
 <script>
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import HeaderMainComponent from '@/components/blocks/HeaderMainComponent.vue';
 import ButtonComponent from '@/components/ui/ButtonComponent.vue';
 export default {
@@ -66,10 +67,22 @@ export default {
     setup() {
         const store = useStore();
         const route = useRoute();
+        const buttonLabel = ref('В корзину');
+        // const isInBasket = ref(false);
+        const changeLabel = () => {
+            if (buttonLabel.value == 'Удалить') {
+                buttonLabel.value = 'В корзину'
+            } else {
+                buttonLabel.value = 'Удалить';
+            }
+        };
         return {
             good: computed(() => store.getters.getGoodById(route.params.id)),
             store,
-            route
+            route,
+            buttonLabel,
+            changeLabel,
+            // isInBasket
         }
     }
 }

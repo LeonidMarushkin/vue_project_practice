@@ -11,21 +11,23 @@
                     <a class="auth-form__link" href="">Войти</a>
                 </router-link>
             </div>
-            <h1 class="auth-form__header">{{ formHeaderTxt }}</h1>
-            <div class="auth-form__info">
-                <input class="auth-form__info-field" v-model="loginValue" type="login" name="login" autocomplete="off"
-                    required placeholder="Логин">
-                <span class="errorMsg" v-if="isErrorLog">Логин должен содержать не менее 4-х символов</span>
-                <input class="auth-form__info-field" v-model="passValue" type="password" name="password" autocomlete="off"
-                    required placeholder="Пароль">
-                <span class="errorMsg" v-if="isErrorPass">Пароль должен содержать не менее 4-х символов</span>
-            </div>
-            <span class="errorMsg" v-if="isErrorLogin">Логин или пароль неверен</span>
-            <div v-if="regShow" class="button">
-                <ButtonComponent @click="checkUser()" textShow isBasketFooter :buttonText=buttonTxt />
-            </div>
-            <div v-if="logShow" class="button">
-                <ButtonComponent @click="addUser()" textShow isBasketFooter :buttonText=buttonTxt />
+            <div class="auth-form__wrapper">
+                <h1 class="auth-form__header">{{ formHeaderTxt }}</h1>
+                <div class="auth-form__info">
+                    <input class="auth-form__info-field" v-model="loginValue" type="login" name="login" autocomplete="off"
+                        required placeholder="Логин">
+                    <span class="errorMsg" v-if="isErrorLog">Логин должен содержать не менее 4-х символов</span>
+                    <input class="auth-form__info-field" v-model="passValue" type="password" name="password"
+                        autocomlete="off" required placeholder="Пароль">
+                    <span class="errorMsg" v-if="isErrorPass">Пароль должен содержать не менее 4-х символов</span>
+                </div>
+                <span class="errorMsg" v-if="isErrorLogin">Логин или пароль неверен</span>
+                <div v-if="regShow" class="button">
+                    <ButtonComponent @click="checkUser()" textShow isBasketFooter :buttonText=buttonTxt />
+                </div>
+                <div v-if="logShow" class="button">
+                    <ButtonComponent @click="addUser()" textShow isBasketFooter :buttonText=buttonTxt />
+                </div>
             </div>
         </form>
     </div>
@@ -137,7 +139,7 @@ export default {
     align-items: center;
     justify-content: space-around;
     padding-top: 220px;
-    padding-bottom: 350px;
+    padding-bottom: 422px;
 }
 
 .auth-form__header {
@@ -174,22 +176,29 @@ export default {
 
 .auth-form {
     width: 500px;
-    padding: 70px 0;
-    border: 3px solid green;
-    text-align: center;
+    // padding: 70px 0;
     background: rgb(255, 255, 255);
 }
 
+.auth-form__wrapper {
+    text-align: center;
+}
+
 .auth-form__link {
-    padding-left: 315px;
+    // padding-left: 315px;
     color: rgb(213, 140, 81);
     font-family: Montserrat;
     font-size: 14px;
     font-weight: 300;
     line-height: 13px;
     letter-spacing: 0%;
-    text-align: right;
     text-decoration-line: underline;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .errorMsg {
@@ -204,5 +213,6 @@ export default {
 
 .button {
     margin-top: 20px;
+    margin-bottom: 35px;
 }
 </style>
