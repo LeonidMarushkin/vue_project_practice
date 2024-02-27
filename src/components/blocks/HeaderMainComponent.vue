@@ -11,14 +11,14 @@
       <router-link to="/basket">
         <ButtonCartComponent />
       </router-link>
-      <ButtonComponent textShow isBasketFooter buttonText='Выход' />
+      <ButtonComponent @click="logoff()" textShow isBasketFooter buttonText='Выход' />
     </div>
   </div>
 </template>
 
 <script>
 // import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
 import { useStore } from 'vuex';
 import ButtonCartComponent from '../ui/ButtonCartComponent.vue';
 import ButtonComponent from '../ui/ButtonComponent.vue';
@@ -45,16 +45,23 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const router = useRouter();
     const basketCount = computed(() => {
       return store.getters.getBasketGoods
     })
+
+    const logoff = () => {
+      localStorage.setItem('isLogged', JSON.stringify(false));
+      router.push('/authorization');
+    }
 
     // const basketSum = computed(()=> {
 
     // })
     return {
       basketCount,
-      route
+      route,
+      logoff
       // basketSum
     }
   }

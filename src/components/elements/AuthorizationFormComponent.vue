@@ -1,6 +1,6 @@
 <template>
     <div class="main__auth">
-        <form class="auth-form" name="form-auth" method="*">
+        <form @submit.prevent class="auth-form" name="form-auth" method="*">
             <div v-if="regShow">
                 <router-link to="/registration">
                     <a class="auth-form__link" href="">Зарегистрироваться</a>
@@ -18,15 +18,19 @@
                 <input class="auth-form__info-field" v-model="passValue" type="password" name="password" autocomlete="off"
                     required placeholder="Пароль">
             </div>
-            <div class="button">
-                <ButtonComponent @click="$emit('clickOnForm')" textShow isBasketFooter :buttonText=buttonTxt />
+            <div v-if="regShow" class="button">
+                <ButtonComponent @click="checkUser()" textShow isBasketFooter :buttonText=buttonTxt />
+            </div>
+            <div v-if="logShow" class="button">
+                <ButtonComponent @click="addUser()" textShow isBasketFooter :buttonText=buttonTxt />
             </div>
         </form>
     </div>
 </template>
 
 <script>
-// import { ref } from 'vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import ButtonComponent from '@/components/ui/ButtonComponent.vue';
 export default {
     name: 'AuthorizationFormComponent',
@@ -52,6 +56,49 @@ export default {
         },
     },
     setup() {
+        const loginValue = ref('');
+        const passValue = ref('');
+        const router = useRouter();
+        const addUser = () => {
+            //валидация
+            // console.log('log', loginValue);
+            // console.log('pass', passValue);
+            const users = JSON.parse(localStorage.getItem('users'));
+            if (!(loginValue.value == '') && !(passValue.value == '')) {
+                users.push({
+                    login: loginValue.value,
+                    pass: passValue.value
+                });
+                localStorage.users = JSON.stringify(users);
+            }
+            // localStorage.setItem('isLogged', JSON.stringify(true));
+            // router.push('/');
+        }
+        const checkUser = () => {
+            //валидация
+            // console.log('log', loginValue);
+            // console.log('pass', passValue);
+            const users = JSON.parse(localStorage.getItem('users'));
+            const userFinded = users.find(elem => {
+                return elem.login == loginValue.value
+            })
+            if (!userFinded) {
+                alert('Такой пользователь не зарегистрирован!');
+            } else {
+                if (userFinded.pass == passValue.value) {
+                    localStorage.isLogged = JSON.stringify(true);
+                    router.push('/');
+                } else {
+                    alert('Введен неверный пароль!');
+                }
+            }
+        }
+        return {
+            checkUser,
+            addUser,
+            loginValue,
+            passValue
+        }
     }
 }
 </script>

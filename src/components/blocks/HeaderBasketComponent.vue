@@ -5,13 +5,14 @@
                 <ButtonComponent fontawesomeIcon='fa-solid fa-arrow-left fa-2xs' isBasketCard iconShow />
             </router-link>
             <h1 class="main__header-info">Корзина с выбранными товарами</h1>
-            <ButtonComponent textShow isBasketFooter buttonText='Выход' />
+            <ButtonComponent @click="logoff()" textShow isBasketFooter buttonText='Выход' />
         </div>
     </div>
 </template>
 
 <script>
 // import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import ButtonComponent from '../ui/ButtonComponent.vue';
 export default {
     name: 'HeaderBasketComponent',
@@ -21,6 +22,14 @@ export default {
     props: {
     },
     setup() {
+        const router = useRouter();
+        const logoff = () => {
+            localStorage.setItem('isLogged', JSON.stringify(false));
+            router.push('/authorization');
+        }
+        return {
+            logoff
+        }
     }
 }
 </script>

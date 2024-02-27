@@ -1,5 +1,5 @@
 <template>
-    <AuthorizationFormComponent @clickOnForm="addUser()" buttonTxt='Зарегестрироваться' formHeaderTxt='РЕГИСТРАЦИЯ' logShow/>
+    <AuthorizationFormComponent buttonTxt='Зарегестрироваться' formHeaderTxt='РЕГИСТРАЦИЯ' logShow/>
 </template>
 
 <script>
@@ -16,21 +16,6 @@ export default {
         const isAuth = ref(true);
         return {
             isAuth
-        }
-    },
-    methods: {
-        addUser() {
-            // if (localStorage.getItem("users")?.length) {
-            //     const users = JSON.parse(localStorage.getItem("users"));
-            //     users.forEach(user => {
-            //         if (user.) {
-
-            //         }
-            //     });
-            //     console.log('Действие не требуется');
-            // } else {
-            //     localStorage.setItem('products', JSON.stringify(this.prodCartData));
-            // }
         }
     },
 }
