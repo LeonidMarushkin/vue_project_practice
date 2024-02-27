@@ -3,6 +3,7 @@ import MainPage from '../views/MainPage.vue'
 import BasketPage from '../views/BasketPage.vue'
 import GoodPage from '../views/GoodPage.vue'
 import AuthorizationPage from '../views/AuthorizationPage.vue'
+import RegistrationPage from '../views/RegistrationPage.vue'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     name: 'authorization',
     component: AuthorizationPage
   },
+  {
+    path: '/registration',
+    name: 'registration',
+    component: RegistrationPage
+  }
 ]
 
 const router = createRouter({

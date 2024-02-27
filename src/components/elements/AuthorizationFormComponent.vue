@@ -1,22 +1,26 @@
 <template>
     <div class="main__auth">
         <form class="auth-form" name="form-auth" method="*">
-            <a href="">Зарегистрироваться</a>
-            <h1 class="auth-form__header">ВХОД</h1>
+            <div v-if="regShow">
+                <router-link to="/registration">
+                    <a class="auth-form__link" href="">Зарегистрироваться</a>
+                </router-link>
+            </div>
+            <div v-if="logShow">
+                <router-link to="/authorization">
+                    <a class="auth-form__link" href="">Войти</a>
+                </router-link>
+            </div>
+            <h1 class="auth-form__header">{{ formHeaderTxt }}</h1>
             <div class="auth-form__info">
-                <div class="auth-form__info-wrapper">
-                    <input class="auth-form__info-field" type="login" name="login" autocomplete="off" required
-                        placeholder="Логин">
-                </div>
-                <div class="auth-form__info-wrapper">
-                    <input class="auth-form__info-field" type="password" name="password" autocomlete="off" required
-                        placeholder="Пароль">
-                </div>
+                <input class="auth-form__info-field" v-model="loginValue" type="login" name="login" autocomplete="off"
+                    required placeholder="Логин">
+                <input class="auth-form__info-field" v-model="passValue" type="password" name="password" autocomlete="off"
+                    required placeholder="Пароль">
             </div>
-            <div class="">
-                <input type="checkbox" class="auth-form__checkbox password-toggler">
+            <div class="button">
+                <ButtonComponent @click="$emit('clickOnForm')" textShow isBasketFooter :buttonText=buttonTxt />
             </div>
-            <ButtonComponent textShow isBasketFooter buttonText='Выход' />
         </form>
     </div>
 </template>
@@ -30,6 +34,22 @@ export default {
         ButtonComponent
     },
     props: {
+        buttonTxt: {
+            type: String,
+            default: ''
+        },
+        regShow: {
+            type: Boolean,
+            default: false
+        },
+        logShow: {
+            type: Boolean,
+            default: false
+        },
+        formHeaderTxt: {
+            type: String,
+            default: ''
+        },
     },
     setup() {
     }
@@ -39,14 +59,15 @@ export default {
 <style lang="scss" scoped>
 .main__auth {
     background-image: url("../../assets/img/background.jpg");
-    background-size: auto;
-    padding-bottom: 1px;
+    background-position: center;
+    background-size: cover;
     display: flex;
     flex-direction: row;
     align-content: center;
     align-items: center;
     justify-content: space-around;
-    padding-top: 220px
+    padding-top: 220px;
+    padding-bottom: 350px;
 }
 
 .auth-form__header {
@@ -66,6 +87,7 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    margin-bottom: 60px;
 }
 
 .auth-form__info-field {
@@ -81,8 +103,6 @@ export default {
     text-align: left;
 }
 
-.auth-form__info-wrapper {}
-
 .auth-form {
     width: 460px;
     padding: 70px 0;
@@ -91,4 +111,7 @@ export default {
     background: rgb(255, 255, 255);
 }
 
+.auth-form__link {
+    padding-left: 315px;
+}
 </style>
