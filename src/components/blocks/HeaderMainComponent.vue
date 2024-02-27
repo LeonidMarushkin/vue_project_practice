@@ -1,6 +1,8 @@
 <template>
   <div class="header">
-    <h1 class="header__title">наша продукция</h1>
+    <div v-if="textShow">
+      <h1 class="header__title">наша продукция</h1>
+    </div>
     <div class="header__cart">
       <div class="header__text">
         <span>{{ basketCount.length }} товара</span>
@@ -9,24 +11,32 @@
       <router-link to="/basket">
         <ButtonCartComponent />
       </router-link>
+      <ButtonComponent textShow isBasketFooter buttonText='Выход' />
     </div>
   </div>
 </template>
 
 <script>
 // import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { useStore } from 'vuex';
 import ButtonCartComponent from '../ui/ButtonCartComponent.vue';
+import ButtonComponent from '../ui/ButtonComponent.vue';
 import { computed } from 'vue';
 
 export default {
   name: 'HeaderMainComponent',
 
   components: {
-    ButtonCartComponent
+    ButtonCartComponent,
+    ButtonComponent
   },
 
   props: {
+    textShow: {
+      type: Boolean,
+      default: false
+    },
   },
 
   methods: {
@@ -34,7 +44,7 @@ export default {
 
   setup() {
     const store = useStore();
-
+    const route = useRoute();
     const basketCount = computed(() => {
       return store.getters.getBasketGoods
     })
@@ -44,6 +54,7 @@ export default {
     // })
     return {
       basketCount,
+      route
       // basketSum
     }
   }

@@ -5,6 +5,7 @@
                 <ButtonComponent fontawesomeIcon='fa-solid fa-arrow-left fa-2xs' isBasketCard iconShow />
             </router-link>
             <h1 class="main__header-info">Корзина с выбранными товарами</h1>
+            <ButtonComponent textShow isBasketFooter buttonText='Выход' />
         </div>
     </div>
 </template>

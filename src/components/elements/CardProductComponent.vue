@@ -1,11 +1,13 @@
 <template>
   <div style="display: flex; justify-content: center;">
     <div v-if="!line" class="card">
-      <div class="card__info">
-        <img class="card__image" :src="imageSource" alt="image.png">
-        <h2 class="card__title">{{ title }}</h2>
-        <h3 class="card__description">{{ description }}</h3>
-      </div>
+      <router-link :to="{ name: 'good', params: { id: goodId }}">
+        <div class="card__info">
+          <img class="card__image" :src="imageSource" alt="image.png">
+          <h2 class="card__title">{{ title }}</h2>
+          <h3 class="card__description">{{ description }}</h3>
+        </div>
+      </router-link>
       <div class="card__footer">
         <div class="card__price">
           <span>{{ price }} ₽</span>
@@ -22,7 +24,8 @@
         <div class="card__price">
           <span>{{ price }} ₽</span>
         </div>
-        <ButtonComponent @click="$emit('clickBasket')" fontawesomeIcon='fa-solid fa-plus fa-2xs' isBasketCard iconShow isRotated />
+        <ButtonComponent @click="$emit('clickBasket')" fontawesomeIcon='fa-solid fa-plus fa-2xs' isBasketCard iconShow
+          isRotated />
       </div>
     </div>
   </div>
@@ -55,9 +58,13 @@ export default {
       type: String,
       default: 'default'
     },
+    goodId: {
+      type: Number,
+      default: 0
+    },
   },
   setup() {
-    
+
   }
 }
 </script>

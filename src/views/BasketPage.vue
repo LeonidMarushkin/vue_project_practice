@@ -45,11 +45,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
-    // height: 100%;
-    // width: 100%;
-    // overflow: hidden;
-}
 
 .main__header {
     background: #161516;

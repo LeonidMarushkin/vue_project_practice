@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="main__header">
-      <HeaderMainComponent />
+      <HeaderMainComponent textShow/>
     </div>
     <MainComponent />
   </div>

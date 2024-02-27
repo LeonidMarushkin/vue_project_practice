@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <CardProductComponent v-for="( cartData, index ) in prodCartData" v-bind:key="index" :title="cartData.title"
-      :description="cartData.description" :price="cartData.price" :imageSource="cartData.imageSource" @clickMain = "addToBasket(cartData.id)" />
+      :description="cartData.description" :price="cartData.price" :imageSource="cartData.imageSource" :goodId="cartData.id" @clickMain = "addToBasket(cartData.id)" />
   </div>
 </template>
 
@@ -11,15 +11,25 @@ import { computed } from 'vue';
 import CardProductComponent from '../elements/CardProductComponent.vue';
 import { useStore } from 'vuex';
 
+
 export default {
   name: 'MainComponent',
   components: {
     CardProductComponent
   },
   data() {
-
+    return {
+      products: []
+    }
   },
   props: {
+  },
+  mounted() {
+    if (localStorage.getItem("products")?.length) {
+      console.log('Действие не требуется');
+    } else {
+      localStorage.setItem('products', JSON.stringify(this.prodCartData));
+    }  
   },
   setup() {
     const store = useStore();
