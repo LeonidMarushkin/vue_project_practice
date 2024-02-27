@@ -37,6 +37,7 @@ export default {
     },
     methods: {
         saveToLocalStorage() {
+            let paramObj = { prodId: 0, isProdCard: 1 };
             const prodList = JSON.parse(localStorage.getItem("products"))
             // console.log(prodList[1]);
             prodList.forEach(prod => {
@@ -44,17 +45,22 @@ export default {
                 if (prod.id == this.good.id) {
                     console.log(prod.addedToBasket);
                     if (prod.addedToBasket == 1) {
-                        prod.addedToBasket = 0;
-                        this.store.commit('removeFromCardBasket');
+                        // prod.addedToBasket = 0;
+                        console.log('Удалить!');
+                        this.store.commit('setStatusAdded', prod.id);
+                        this.store.commit('removeFromCardBasket', prod.id);
                         console.log(prod);
                     } else {
-                        prod.addedToBasket = 1;
-                        this.store.commit('addGoodInBasket', prod.id);
+                        // prod.addedToBasket = 1;
+                        paramObj.prodId = prod.id;
+                        console.log('Добавить!');
+                        this.store.commit('setStatusAdded', prod.id);
+                        this.store.commit('addGoodInBasket', paramObj);
                         console.log(prod);
                     }
                 }
             });
-            localStorage.setItem('products', JSON.stringify(prodList));
+            // localStorage.setItem('products', JSON.stringify(prodList));
         },
     },
     setup() {

@@ -75,6 +75,18 @@ export default {
         }
     },
     mutations: {
+        setStatusAdded(state, id) {
+            state.goods.forEach(good => {
+                if (good.id == id) {
+                    if (good.addedToBasket == 0) {
+                        good.addedToBasket = 1;
+                    } else {
+                        good.addedToBasket = 0;
+                    }
+                }
+            });
+            localStorage.setItem('products', JSON.stringify(state.goods));
+        },
     },
     actions: {
     },

@@ -10,33 +10,50 @@ export default {
     },
     mutations: {
         addGoodInBasket(state, value) {
-            const goods = JSON.parse(localStorage.getItem("products"));
-            goods.forEach(good => {
-                if (value === good.id && good.addedToBasket == 1) {
-                    const goodsInBasket = JSON.parse(localStorage.getItem("basket"));
-                    if (goodsInBasket.find(good)) {
+            // console.log(value);
+            const products = JSON.parse(localStorage.getItem("products"));
+            // console.log(products);
+            for (let i = 0; i < products.length; i++) {
+                if (value.isProdCard) {
+                    if (products[i].id == value.prodId && products[i].addedToBasket == 1) {
+                        const newGoodToAdd = products[i];
+                        newGoodToAdd.addedToBasket = 1;
+                        state.goodsInBasket.push(newGoodToAdd);
                         localStorage.setItem('basket', JSON.stringify(state.goodsInBasket));
-                    } else {
-                        good.addedToBasket = 1;
-                        state.goodsInBasket.push(good);
-                        localStorage.setItem('basket', JSON.stringify(state.goodsInBasket));
+                        break;
                     }
                 } else {
-                    state.goodsInBasket.push(good);
-                    localStorage.setItem('basket', JSON.stringify(state.goodsInBasket));
+                    if (products[i].id == value.prodId) {
+                        const newProdToAdd = products[i];
+                        console.log('Попало!');
+                        newProdToAdd.addedToBasket = 0;
+                        state.goodsInBasket.push(newProdToAdd);
+                        localStorage.setItem('basket', JSON.stringify(state.goodsInBasket));
+                    }
                 }
-            });
+            }
         },
         removeGoodFromBasket(state, value) {
             state.goodsInBasket.splice(value, 1);
             localStorage.setItem('basket', JSON.stringify(state.goodsInBasket));
         },
-        removeFromCardBasket(state) {
-            state.goodsInBasket.pop();
-            localStorage.setItem('basket', JSON.stringify(state.goodsInBasket));
+        removeFromCardBasket(state, value) {
+            for (let i = 0; i < state.goodsInBasket.length; i++) {
+                if (state.goodsInBasket[i].id == value && state.goodsInBasket[i].addedToBasket == 1) {
+                    state.goodsInBasket.splice(i, 1);
+                    localStorage.setItem('basket', JSON.stringify(state.goodsInBasket));
+                }
+            }
+        },
+        setBaskteInitialData(state) {
+            const basket = JSON.parse(localStorage.getItem('basket'));
+            state.goodsInBasket = basket;
         }
     },
     actions: {
+        updateData({ commit }) {
+            commit("setBaskteInitialData");
+        }
     },
     modules: {
     }

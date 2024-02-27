@@ -1,7 +1,8 @@
 <template>
   <div class="main">
     <CardProductComponent v-for="( cartData, index ) in prodCartData" v-bind:key="index" :title="cartData.title"
-      :description="cartData.description" :price="cartData.price" :imageSource="cartData.imageSource" :goodId="cartData.id" @clickMain = "addToBasket(cartData.id)" />
+      :description="cartData.description" :price="cartData.price" :imageSource="cartData.imageSource"
+      :goodId="cartData.id" @clickMain="addToBasket(cartData.id)" />
   </div>
 </template>
 
@@ -29,7 +30,11 @@ export default {
       console.log('Действие не требуется');
     } else {
       localStorage.setItem('products', JSON.stringify(this.prodCartData));
-    }  
+    }
+    if (localStorage.getItem("basket")?.length) {
+      // console.log('Корзина не пустая');
+      this.store.dispatch('updateData');
+    }
   },
   setup() {
     const store = useStore();
@@ -39,12 +44,15 @@ export default {
     })
 
     const addToBasket = (goodId) => {
+      let paramObj = { prodId: 0, isProdCard: 0 };
+      paramObj.prodId = goodId;
       console.log(`Добвалено в в корзину`, goodId);
-      store.commit('addGoodInBasket', goodId);
+      store.commit('addGoodInBasket', paramObj);
     }
     return {
       prodCartData,
-      addToBasket
+      addToBasket,
+      store
     }
   }
 }
