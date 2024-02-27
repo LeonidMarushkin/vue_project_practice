@@ -77,11 +77,11 @@ export default {
                     alert('Такой пользователь зарегистрирован!');
                     router.push('/authorization');
                 } else {
-                    if (loginValue.value.length < 5) {
+                    if (loginValue.value.length < 4) {
                         isErrorLog.value = true;
                     } else {
                         isErrorLog.value = false;
-                        if (passValue.value.length < 5) {
+                        if (passValue.value.length < 4) {
                             isErrorPass.value = true;
                         } else {
                             isErrorPass.value = false;
